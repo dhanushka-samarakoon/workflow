@@ -1,8 +1,9 @@
+<table>
 <?php foreach ($publishers as $publisher): ?>
-
-    <h2><?php echo $publisher['PubID'] ?></h2>
-    <div id="main">
-        <?php echo $publisher['PubName'] ?>
-    </div>
-
+	<tr>
+    	<td><?php echo $publisher['PubID'] ?></td>
+        <td><?php echo $publisher['PubName'] ?></td>
+        <td><a href="publishers/<?php echo $publisher['PubID'] ?>">View</a></td>
+	</tr>
 <?php endforeach ?>
+</table>

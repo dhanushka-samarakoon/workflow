@@ -16,5 +16,21 @@ class Publishers extends CI_Controller {
 		$this->load->view('publishers/index', $data);
 		$this->load->view('templates/footer');
 	}
+	
+	public function view($PubID)
+	{
+		$data['publisher'] = $this-> Publishers_model-> get_publishers($PubID);
+		
+		if (empty($data['publisher']))
+		{
+			show_404();
+		}
+	
+		$data['title'] = $data['publisher']['PubName'];
+	
+		$this->load->view('templates/header', $data);
+		$this->load->view('publishers/view', $data);
+		$this->load->view('templates/footer');
+	}
 
 }
