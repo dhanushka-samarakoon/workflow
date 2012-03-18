@@ -38,6 +38,8 @@
 |
 */
 
+$route['publishers/(:any)'] = 'publishers/view/$1';
+$route['publishers'] = 'publishers';
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
