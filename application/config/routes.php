@@ -38,10 +38,16 @@
 |
 */
 
+$route['tasks'] = 'tasks';
+$route['tasks/edit/(:any)'] = 'tasks/edit/$1';
+
 $route['publishers/add'] = 'publishers/add';
 $route['publishers/insert'] = 'publishers/insert';
-$route['publishers/(:any)'] = 'publishers/view/$1';
+$route['publishers/edit/(:any)'] = 'publishers/edit/$1';
+$route['publishers/remove/(:any)'] = 'publishers/remove/$1';
+$route['publishers/view/(:any)'] = 'publishers/view/$1';
 $route['publishers'] = 'publishers';
+
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 

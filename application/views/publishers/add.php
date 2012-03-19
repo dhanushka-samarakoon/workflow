@@ -20,5 +20,5 @@
 <? echo 'notes'; ?>: 
 <? echo form_textarea('notes'); ?>
 </br>
-<? echo form_submit('mysubmit','Submit!');  ?>
+<? echo form_submit('PubSubmit','Add Publisher');  ?>
 <? echo form_close(); ?>
