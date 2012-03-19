@@ -1,4 +1,4 @@
-<? echo form_open('publishers/insert'); ?>
+<? echo form_open('publishers/update'); ?>
 <? echo form_hidden('PubID', $publisher['PubID']); ?>
 <? echo 'Publisher Name'; ?>: 
 <? echo form_input('PubName', $publisher['PubName']); ?>

@@ -10,8 +10,8 @@ class Publishers_model extends CI_Model {
 	{
 		if ($PubID === FALSE)
 		{
-			$query = $this->db->get('Publishers');
-			return $query->result_array();
+			$query = $this->db->query('SELECT * FROM Publishers ORDER BY PubName ASC');
+			return $query;
 		}
 		
 		$query = $this->db->query('SELECT * FROM Publishers WHERE PubID='.$PubID);
