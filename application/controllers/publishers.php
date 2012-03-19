@@ -32,5 +32,25 @@ class Publishers extends CI_Controller {
 		$this->load->view('publishers/view', $data);
 		$this->load->view('templates/footer');
 	}
+	
+	public function add()
+	{
+		$this->load->helper('form');
+		
+		$data['title'] = 'Add a Publisher';
+		
+		$this->load->view('templates/header', $data);
+		$this->load->view('publishers/add', $data);
+		$this->load->view('templates/footer');
+	}
+	
+	public function insert()
+	{
+		$PubInfo = $this->input->post();
+		$this-> Publishers_model-> insert_publisher($PubInfo);
+		
+		$this->load->helper('url');
+		redirect('publishers');
+	}
 
 }
