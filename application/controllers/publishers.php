@@ -52,5 +52,47 @@ class Publishers extends CI_Controller {
 		$this->load->helper('url');
 		redirect('publishers/view/'.$newPubID);
 	}
+	
+	public function edit($PubID)
+	{
+		$data['publisher'] = $this-> Publishers_model-> get_publishers($PubID);
+		
+		if (empty($data['publisher']))
+		{
+			show_404();
+		}
+	
+		$data['title'] = $data['publisher']['PubName'];
+		
+		$this->load->helper('form');
+		
+		$this->load->view('templates/header', $data);
+		$this->load->view('publishers/edit', $data);
+		$this->load->view('templates/footer');
+	}
+	
+	public function update()
+	{
+		$PubInfo = $this->input->post();
+		$PubID = $this-> Publishers_model-> update_publisher($PubInfo);
+		
+		$this->load->helper('url');
+		redirect('publishers/view/'.$PubID);
+	}
+	
+	public function remove($PubID)
+	{
+		$data['publisher'] = $this-> Publishers_model-> get_publishers($PubID);
+		
+		if (empty($data['publisher']))
+		{
+			show_404();
+		}
+		
+		$PubID = $this-> Publishers_model-> delete_publisher($PubID);
+		
+		$this->load->helper('url');
+		redirect('publishers');
+	}
 
 }

@@ -40,6 +40,8 @@
 
 $route['publishers/add'] = 'publishers/add';
 $route['publishers/insert'] = 'publishers/insert';
+$route['publishers/edit/(:any)'] = 'publishers/edit/$1';
+$route['publishers/remove/(:any)'] = 'publishers/remove/$1';
 $route['publishers/view/(:any)'] = 'publishers/view/$1';
 $route['publishers'] = 'publishers';
 
