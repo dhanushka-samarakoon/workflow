@@ -18,13 +18,13 @@ class Publishers_model extends CI_Model {
 		return $query->row_array();
 	}
 	
-	public function insert_publisher($PubInfo = FALSE)
+	public function insert_publisher()
 	{
-		$sql = "INSERT INTO Publishers (PubName) 
-        VALUES (".$this->db->escape($PubInfo['PubName']).")";
-
-		$this->db->query($sql);
+		$data = array(
+		'PubName' => $this->input->post('PubName')
+		);
 		
-		//echo $this->db->affected_rows();
+		$this->db->insert('Publishers', $data);
+		return $this->db->insert_id();
 	}
 }

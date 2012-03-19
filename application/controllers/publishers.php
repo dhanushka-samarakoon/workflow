@@ -47,10 +47,10 @@ class Publishers extends CI_Controller {
 	public function insert()
 	{
 		$PubInfo = $this->input->post();
-		$this-> Publishers_model-> insert_publisher($PubInfo);
+		$newPubID = $this-> Publishers_model-> insert_publisher($PubInfo);
 		
 		$this->load->helper('url');
-		redirect('publishers');
+		redirect('publishers/view/'.$newPubID);
 	}
 
 }
