@@ -52,5 +52,5 @@ class Publishers extends CI_Controller {
 		$this->load->helper('url');
 		redirect('publishers');
 	}
-
+//This is a comment
 }
