@@ -42,6 +42,7 @@ $route['publishers/add'] = 'publishers/add';
 $route['publishers/insert'] = 'publishers/insert';
 $route['publishers/view/(:any)'] = 'publishers/view/$1';
 $route['publishers'] = 'publishers';
+
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
