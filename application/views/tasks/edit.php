@@ -1,37 +1,37 @@
-<? echo form_open('tasks/update'); ?>
-<? echo form_hidden('TaskID', $task['TaskID']); ?>
-<? echo 'Title'; ?>: 
-<? echo form_input('Title', $task['Title']); ?>
+<?php echo form_open('tasks/update'); ?>
+<?php echo form_hidden('TaskID', $task['TaskID']); ?>
+<?php echo 'Title'; ?>: 
+<?php echo form_input('Title', $task['Title']); ?>
 </br>
-<? echo 'Author'; ?>: 
-<? echo form_input('Author', $task['Author']); ?>
+<?php echo 'Author'; ?>: 
+<?php echo form_input('Author', $task['Author']); ?>
 </br>
-<? echo 'KSUAuthors'; ?>: 
-<? echo form_input('KSUAuthors', $task['KSUAuthors']); ?>
+<?php echo 'KSUAuthors'; ?>: 
+<?php echo form_input('KSUAuthors', $task['KSUAuthors']); ?>
 </br>
-<? echo 'PubID'; ?>: 
-<? echo form_input('PubID', $task['PubID']); ?>
+<?php echo 'PubID'; ?>: 
+<?php echo form_input('PubID', $task['PubID']); ?>
 </br>
-<? echo 'Publishers'; ?>: 
-<? echo form_dropdown('Publishers', $publishers, $task['PubID']) ?>
+<?php echo 'Publishers'; ?>: 
+<?php echo form_dropdown('Publishers', $publishers, $task['PubID']) ?>
 </br>
-<? echo 'StatusID'; ?>: 
-<? echo form_input('StatusID', $task['StatusID']); ?>
+<?php echo 'StatusID'; ?>: 
+<?php echo form_input('StatusID', $task['StatusID']); ?>
 </br>
-<? echo 'UserID'; ?>: 
-<? echo form_input('UserID', $task['UserID']); ?>
+<?php echo 'UserID'; ?>: 
+<?php echo form_input('UserID', $task['UserID']); ?>
 </br>
-<? echo 'Notes'; ?>: 
-<? echo form_textarea('Notes', $task['Notes']); ?>
+<?php echo 'Notes'; ?>: 
+<?php echo form_textarea('Notes', $task['Notes']); ?>
 </br>
-<? echo 'FileNames'; ?>: 
-<? echo form_textarea('FileNames', $task['FileNames']); ?>
+<?php echo 'FileNames'; ?>: 
+<?php echo form_textarea('FileNames', $task['FileNames']); ?>
 </br>
-<? echo 'LastUpdatedDate'; ?>: 
-<? echo form_input('LastUpdatedDate', $task['LastUpdatedDate']); ?>
+<?php echo 'LastUpdatedDate'; ?>: 
+<?php echo form_input('LastUpdatedDate', $task['LastUpdatedDate']); ?>
 </br>
-<? echo 'CreatedDate'; ?>: 
-<? echo form_input('CreatedDate', $task['CreatedDate']); ?>
+<?php echo 'CreatedDate'; ?>: 
+<?php echo form_input('CreatedDate', $task['CreatedDate']); ?>
 </br>
-<? echo form_submit('TaskSubmit','Save task');  ?>
-<? echo form_close(); ?>
+<?php echo form_submit('TaskSubmit','Save task');  ?>
+<?php echo form_close(); ?>

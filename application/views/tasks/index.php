@@ -1,10 +1,10 @@
-<? $this->load->helper('url'); ?>
+<?php $this->load->helper('url'); ?>
 <table>
-<? foreach ($tasks->result_array() as $task): ?>
+<?php foreach ($tasks->result_array() as $task): ?>
 	<tr>
-    	<td><? echo $task['TaskID'] ?></td>
-        <td><? echo $task['Title'] ?></td>
-		<td><a href="<? echo site_url('tasks/edit/'.$task['TaskID']);?>">Edit</a></td>
+    	<td><?php echo $task['TaskID'] ?></td>
+        <td><?php echo $task['Title'] ?></td>
+		<td><a href="<?php echo site_url('tasks/edit/'.$task['TaskID']);?>">Edit</a></td>
 	</tr>
-<? endforeach ?>
+<?php endforeach ?>
 </table>

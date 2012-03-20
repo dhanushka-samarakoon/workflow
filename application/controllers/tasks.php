@@ -20,6 +20,7 @@ class Tasks extends CI_Controller {
 	
 	public function add()
 	{
+		//Get a List of Publishers
 		$publishers = $this->Publishers_model->get_publishers();
 		$PublishersArray = array();
 		foreach($publishers->result_array() as $publisher){
@@ -47,6 +48,7 @@ class Tasks extends CI_Controller {
 	
 	public function edit($TaskID)
 	{
+		//Get a List of Publishers
 		$publishers = $this->Publishers_model->get_publishers();
 		$PublishersArray = array();
 		foreach($publishers->result_array() as $publisher){

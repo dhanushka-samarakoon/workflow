@@ -1,25 +1,25 @@
-<? echo form_open('publishers/update'); ?>
-<? echo form_hidden('PubID', $publisher['PubID']); ?>
-<? echo 'Publisher Name'; ?>: 
-<? echo form_input('PubName', $publisher['PubName']); ?>
+<?php echo form_open('publishers/update'); ?>
+<?php echo form_hidden('PubID', $publisher['PubID']); ?>
+<?php echo 'Publisher Name'; ?>: 
+<?php echo form_input('PubName', $publisher['PubName']); ?>
 </br>
-<? echo 'Policy Link'; ?>: 
-<? echo form_input('PolicyLink', $publisher['PolicyLink']); ?>
+<?php echo 'Policy Link'; ?>: 
+<?php echo form_input('PolicyLink', $publisher['PolicyLink']); ?>
 </br>
-<? echo 'Policy Text'; ?>: 
-<? echo form_input('PolicyText', $publisher['PolicyText']); ?>
+<?php echo 'Policy Text'; ?>: 
+<?php echo form_input('PolicyText', $publisher['PolicyText']); ?>
 </br>
-<? echo 'What we can put up'; ?>: 
-<? echo form_input('what_we_can_put_up', $publisher['what_we_can_put_up']); ?>
+<?php echo 'What we can put up'; ?>: 
+<?php echo form_input('what_we_can_put_up', $publisher['what_we_can_put_up']); ?>
 </br>
-<? echo 'What we need to add'; ?>: 
-<? echo form_input('what_we_need_to_add', $publisher['what_we_need_to_add']); ?>
+<?php echo 'What we need to add'; ?>: 
+<?php echo form_input('what_we_need_to_add', $publisher['what_we_need_to_add']); ?>
 </br>
-<? echo 'embargo'; ?>: 
-<? echo form_input('embargo', $publisher['embargo']); ?>
+<?php echo 'embargo'; ?>: 
+<?php echo form_input('embargo', $publisher['embargo']); ?>
 </br>
-<? echo 'notes'; ?>: 
-<? echo form_textarea('notes', $publisher['notes']); ?>
+<?php echo 'notes'; ?>: 
+<?php echo form_textarea('notes', $publisher['notes']); ?>
 </br>
-<? echo form_submit('PubSubmit','Save Publisher');  ?>
-<? echo form_close(); ?>
+<?php echo form_submit('PubSubmit','Save Publisher');  ?>
+<?php echo form_close(); ?>
