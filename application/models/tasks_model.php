@@ -20,17 +20,20 @@ class Tasks_model extends CI_Model {
 	
 	public function insert_task()
 	{
+		$this->load->helper('date');
+		$datestring = "%Y-%m-%d";
+		
 		$data = array(
 			'Title' => $this->input->post('Title'),
 			'Author' => $this->input->post('Author'),
 			'KSUAuthors' => $this->input->post('KSUAuthors'),
-			'PubID' => $this->input->post('PubID'),
-			'StatusID' => $this->input->post('StatusID'),
+			'PubID' => $this->input->post('Publishers'),
+			'StatusID' => $this->input->post('Status'),
 			'UserID' => $this->input->post('UserID'),
 			'Notes' => $this->input->post('Notes'),
 			'FileNames' => $this->input->post('FileNames'),
-			'CreatedDate' => $this->input->post('CreatedDate'),
-			'LastUpdatedDate' => $this->input->post('LastUpdatedDate')
+			'CreatedDate' => mdate($datestring, now()),
+			'LastUpdatedDate' => mdate($datestring, now())
 		);
 		
 		$this->db->insert('Tasks', $data);
@@ -39,21 +42,35 @@ class Tasks_model extends CI_Model {
 	
 	public function update_task($TaskInfo = FALSE)
 	{
+		$this->load->helper('date');
+		$datestring = "%Y-%m-%d";
+		
 		$data = array(
 			'Title' => $this->input->post('Title'),
 			'Author' => $this->input->post('Author'),
 			'KSUAuthors' => $this->input->post('KSUAuthors'),
-			'PubID' => $this->input->post('PubID'),
-			'StatusID' => $this->input->post('StatusID'),
+			'PubID' => $this->input->post('Publishers'),
+			'StatusID' => $this->input->post('Status'),
 			'UserID' => $this->input->post('UserID'),
 			'Notes' => $this->input->post('Notes'),
 			'FileNames' => $this->input->post('FileNames'),
-			'CreatedDate' => $this->input->post('CreatedDate'),
-			'LastUpdatedDate' => $this->input->post('LastUpdatedDate')
+			'LastUpdatedDate' => mdate($datestring, now())
 		);
 		
 		$this->db->where('TaskID', $TaskInfo['TaskID']);
 		$this->db->update('Tasks', $data);
 		return $TaskInfo['TaskID'];
+	}
+	
+	public function get_status($StatusID = FALSE)
+	{
+		if ($StatusID === FALSE)
+		{
+			$query = $this->db->query('SELECT * FROM Status ORDER BY StatusOrder ASC');
+			return $query;
+		}
+		
+		$query = $this->db->query('SELECT * FROM Status WHERE StatusID='.$StatusID);
+		return $query->row_array();
 	}
 }

@@ -8,14 +8,11 @@
 <?php echo 'KSUAuthors'; ?>: 
 <?php echo form_input('KSUAuthors'); ?>
 </br>
-<?php echo 'PubID'; ?>: 
-<?php echo form_input('PubID'); ?>
-</br>
 <?php echo 'Publishers'; ?>: 
 <?php echo form_dropdown('Publishers', $publishers) ?>
 </br>
-<?php echo 'StatusID'; ?>: 
-<?php echo form_input('StatusID'); ?>
+<?php echo 'Status'; ?>: 
+<?php echo form_dropdown('Status', $Status) ?>
 </br>
 <?php echo 'UserID'; ?>: 
 <?php echo form_input('UserID'); ?>

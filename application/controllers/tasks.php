@@ -28,6 +28,14 @@ class Tasks extends CI_Controller {
 		}
 		$data['publishers'] = $PublishersArray;
 		
+		//Get a List of Status
+		$StatusList = $this->Tasks_model->get_status();
+		$StatusArray = array();
+		foreach($StatusList->result_array() as $Status){
+			$StatusArray[$Status['StatusID']] = $Status['status_desc'];
+		}
+		$data['Status'] = $StatusArray;
+		
 		$this->load->helper('form');
 		
 		$data['title'] = 'Add a Task';
@@ -55,6 +63,14 @@ class Tasks extends CI_Controller {
 			$PublishersArray[$publisher['PubID']] = $publisher['PubName'];
 		}
 		$data['publishers'] = $PublishersArray;
+		
+		//Get a List of Status
+		$StatusList = $this->Tasks_model->get_status();
+		$StatusArray = array();
+		foreach($StatusList->result_array() as $Status){
+			$StatusArray[$Status['StatusID']] = $Status['status_desc'];
+		}
+		$data['Status'] = $StatusArray;
 		
 		$data['task'] = $this-> Tasks_model-> get_tasks($TaskID);
 		

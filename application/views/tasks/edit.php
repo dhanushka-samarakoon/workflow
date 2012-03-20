@@ -9,14 +9,11 @@
 <?php echo 'KSUAuthors'; ?>: 
 <?php echo form_input('KSUAuthors', $task['KSUAuthors']); ?>
 </br>
-<?php echo 'PubID'; ?>: 
-<?php echo form_input('PubID', $task['PubID']); ?>
-</br>
 <?php echo 'Publishers'; ?>: 
 <?php echo form_dropdown('Publishers', $publishers, $task['PubID']) ?>
 </br>
-<?php echo 'StatusID'; ?>: 
-<?php echo form_input('StatusID', $task['StatusID']); ?>
+<?php echo 'Status'; ?>: 
+<?php echo form_dropdown('Status', $Status, $task['StatusID']) ?>
 </br>
 <?php echo 'UserID'; ?>: 
 <?php echo form_input('UserID', $task['UserID']); ?>
