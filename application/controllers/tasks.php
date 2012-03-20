@@ -18,6 +18,33 @@ class Tasks extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
+	public function add()
+	{
+		$publishers = $this->Publishers_model->get_publishers();
+		$PublishersArray = array();
+		foreach($publishers->result_array() as $publisher){
+			$PublishersArray[$publisher['PubID']] = $publisher['PubName'];
+		}
+		$data['publishers'] = $PublishersArray;
+		
+		$this->load->helper('form');
+		
+		$data['title'] = 'Add a Task';
+		
+		$this->load->view('templates/header', $data);
+		$this->load->view('tasks/add', $data);
+		$this->load->view('templates/footer');
+	}
+	
+	public function insert()
+	{
+		$TaskInfo = $this->input->post();
+		$newTaskID = $this-> Tasks_model-> insert_task($TaskInfo);
+		
+		$this->load->helper('url');
+		redirect('tasks/edit/'.$newTaskID);
+	}
+	
 	public function edit($TaskID)
 	{
 		$publishers = $this->Publishers_model->get_publishers();

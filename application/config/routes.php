@@ -38,6 +38,7 @@
 |
 */
 
+$route['tasks/add'] = 'tasks/add';
 $route['tasks'] = 'tasks';
 $route['tasks/edit/(:any)'] = 'tasks/edit/$1';
 

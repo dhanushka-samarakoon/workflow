@@ -18,6 +18,25 @@ class Tasks_model extends CI_Model {
 		return $query->row_array();
 	}
 	
+	public function insert_task()
+	{
+		$data = array(
+			'Title' => $this->input->post('Title'),
+			'Author' => $this->input->post('Author'),
+			'KSUAuthors' => $this->input->post('KSUAuthors'),
+			'PubID' => $this->input->post('PubID'),
+			'StatusID' => $this->input->post('StatusID'),
+			'UserID' => $this->input->post('UserID'),
+			'Notes' => $this->input->post('Notes'),
+			'FileNames' => $this->input->post('FileNames'),
+			'CreatedDate' => $this->input->post('CreatedDate'),
+			'LastUpdatedDate' => $this->input->post('LastUpdatedDate')
+		);
+		
+		$this->db->insert('Tasks', $data);
+		return $this->db->insert_id();
+	}
+	
 	public function update_task($TaskInfo = FALSE)
 	{
 		$data = array(
