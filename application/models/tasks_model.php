@@ -19,7 +19,12 @@ class Tasks_model extends CI_Model {
 			return $query;
 		}
 		
-		$query = $this->db->query('SELECT * FROM Tasks WHERE TaskID='.$TaskID);
+		$query = $this->db->query('SELECT TaskID, Title, Author, KSUAuthors, Tasks.PubID, Tasks.StatusID, status_desc, 
+							Tasks.UserID, UserName, FirstName, LastName, email, Notes, FileNames, CreatedDate, LastUpdatedDate  
+						FROM Tasks, Status, Users 
+						WHERE Tasks.StatusID = Status.StatusID 
+						AND Tasks.UserID = Users.UserID 
+						AND TaskID='.$TaskID);
 		return $query->row_array();
 	}
 	
