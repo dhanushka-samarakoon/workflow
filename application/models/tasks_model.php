@@ -10,7 +10,12 @@ class Tasks_model extends CI_Model {
 	{
 		if ($TaskID === FALSE)
 		{
-			$query = $this->db->query('SELECT * FROM Tasks WHERE StatusID!=-1 ORDER BY TaskID ASC');
+			$query = $this->db->query('SELECT TaskID, Title, Author, KSUAuthors, Tasks.PubID, Tasks.StatusID, status_desc, 
+							Tasks.UserID, UserName, FirstName, LastName, email, Notes, FileNames, CreatedDate, LastUpdatedDate 
+						FROM Tasks, Status, Users 
+						WHERE Tasks.StatusID = Status.StatusID 
+						AND Tasks.UserID = Users.UserID 
+						AND Tasks.StatusID!=-1 ORDER BY TaskID ASC');
 			return $query;
 		}
 		
