@@ -29,7 +29,7 @@ class Tasks_model extends CI_Model {
 			'KSUAuthors' => $this->input->post('KSUAuthors'),
 			'PubID' => $this->input->post('Publishers'),
 			'StatusID' => $this->input->post('Status'),
-			'UserID' => $this->input->post('UserID'),
+			'UserID' => $this->input->post('User'),
 			'Notes' => $this->input->post('Notes'),
 			'FileNames' => $this->input->post('FileNames'),
 			'CreatedDate' => mdate($datestring, now()),
@@ -51,7 +51,7 @@ class Tasks_model extends CI_Model {
 			'KSUAuthors' => $this->input->post('KSUAuthors'),
 			'PubID' => $this->input->post('Publishers'),
 			'StatusID' => $this->input->post('Status'),
-			'UserID' => $this->input->post('UserID'),
+			'UserID' => $this->input->post('Users'),
 			'Notes' => $this->input->post('Notes'),
 			'FileNames' => $this->input->post('FileNames'),
 			'LastUpdatedDate' => mdate($datestring, now())

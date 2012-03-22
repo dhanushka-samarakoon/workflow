@@ -96,7 +96,7 @@ class Tasks extends CI_Controller {
 			show_404();
 		}
 	
-		$data['title'] = $data['task']['Title'];
+		$data['title'] = 'Edit Task';
 		
 		$this->load->helper('form');
 		
