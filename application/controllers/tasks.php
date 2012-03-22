@@ -6,6 +6,7 @@ class Tasks extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Tasks_model');
 		$this->load->model('Publishers_model');
+		$this->load->model('Users_model');
 	}
 
 	public function index()
@@ -26,7 +27,7 @@ class Tasks extends CI_Controller {
 		foreach($publishers->result_array() as $publisher){
 			$PublishersArray[$publisher['PubID']] = $publisher['PubName'];
 		}
-		$data['publishers'] = $PublishersArray;
+		$data['Publishers'] = $PublishersArray;
 		
 		//Get a List of Status
 		$StatusList = $this->Tasks_model->get_status();
@@ -35,6 +36,14 @@ class Tasks extends CI_Controller {
 			$StatusArray[$Status['StatusID']] = $Status['status_desc'];
 		}
 		$data['Status'] = $StatusArray;
+		
+		//Get a List of Users
+		$users = $this->Users_model->get_users();
+		$UsersArray = array();
+		foreach($users->result_array() as $user){
+			$UsersArray[$user['UserID']] = $user['FirstName'].' '.$user['LastName'];
+		}
+		$data['Users'] = $UsersArray;
 		
 		$this->load->helper('form');
 		
@@ -71,6 +80,14 @@ class Tasks extends CI_Controller {
 			$StatusArray[$Status['StatusID']] = $Status['status_desc'];
 		}
 		$data['Status'] = $StatusArray;
+		
+		//Get a List of Users
+		$users = $this->Users_model->get_users();
+		$UsersArray = array();
+		foreach($users->result_array() as $user){
+			$UsersArray[$user['UserID']] = $user['FirstName'].' '.$user['LastName'];
+		}
+		$data['Users'] = $UsersArray;
 		
 		$data['task'] = $this-> Tasks_model-> get_tasks($TaskID);
 		

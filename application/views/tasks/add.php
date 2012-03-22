@@ -9,13 +9,13 @@
 <?php echo form_input('KSUAuthors'); ?>
 </br>
 <?php echo 'Publishers'; ?>: 
-<?php echo form_dropdown('Publishers', $publishers) ?>
+<?php echo form_dropdown('Publishers', $Publishers) ?>
 </br>
 <?php echo 'Status'; ?>: 
 <?php echo form_dropdown('Status', $Status) ?>
 </br>
-<?php echo 'UserID'; ?>: 
-<?php echo form_input('UserID'); ?>
+<?php echo 'Assigned User'; ?>: 
+<?php echo form_dropdown('Users', $Users) ?>
 </br>
 <?php echo 'Notes'; ?>: 
 <?php echo form_textarea('Notes'); ?>

@@ -15,8 +15,8 @@
 <?php echo 'Status'; ?>: 
 <?php echo form_dropdown('Status', $Status, $task['StatusID']) ?>
 </br>
-<?php echo 'UserID'; ?>: 
-<?php echo form_input('UserID', $task['UserID']); ?>
+<?php echo 'Assigned User'; ?>: 
+<?php echo form_dropdown('Users', $Users, $task['UserID']) ?>
 </br>
 <?php echo 'Notes'; ?>: 
 <?php echo form_textarea('Notes', $task['Notes']); ?>
