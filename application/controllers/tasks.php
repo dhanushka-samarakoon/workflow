@@ -56,7 +56,21 @@ class Tasks extends CI_Controller {
 	
 	public function insert()
 	{
-		$TaskInfo = $this->input->post();
+		$this->load->helper('date');
+		$datestring = "%Y-%m-%d";
+		
+		$TaskInfo = array(
+			'Title' => $this->input->post('Title'),
+			'Author' => $this->input->post('Author'),
+			'KSUAuthors' => $this->input->post('KSUAuthors'),
+			'PubID' => $this->input->post('Publishers'),
+			'StatusID' => $this->input->post('Status'),
+			'UserID' => $this->input->post('User'),
+			'Notes' => $this->input->post('Notes'),
+			'FileNames' => $this->input->post('FileNames'),
+			'CreatedDate' => mdate($datestring, now()),
+			'LastUpdatedDate' => mdate($datestring, now())
+		);
 		$newTaskID = $this-> Tasks_model-> insert_task($TaskInfo);
 		
 		$this->load->helper('url');
@@ -107,7 +121,22 @@ class Tasks extends CI_Controller {
 	
 	public function update()
 	{
-		$TaskInfo = $this->input->post();
+		$this->load->helper('date');
+		$datestring = "%Y-%m-%d";
+		
+		$TaskInfo = array(
+			'TaskID' => $this->input->post('TaskID'),
+			'Title' => $this->input->post('Title'),
+			'Author' => $this->input->post('Author'),
+			'KSUAuthors' => $this->input->post('KSUAuthors'),
+			'PubID' => $this->input->post('Publishers'),
+			'StatusID' => $this->input->post('Status'),
+			'UserID' => $this->input->post('Users'),
+			'Notes' => $this->input->post('Notes'),
+			'FileNames' => $this->input->post('FileNames'),
+			'LastUpdatedDate' => mdate($datestring, now())
+		);
+		
 		$TaskID = $this-> Tasks_model-> update_task($TaskInfo);
 		
 		$this->load->helper('url');
@@ -115,3 +144,5 @@ class Tasks extends CI_Controller {
 	}
 
 }
+
+?>

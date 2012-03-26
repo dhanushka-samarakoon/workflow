@@ -46,7 +46,15 @@ class Publishers extends CI_Controller {
 	
 	public function insert()
 	{
-		$PubInfo = $this->input->post();
+		$PubInfo = array(
+			'PubName' => $this->input->post('PubName'),
+			'PolicyLink' => $this->input->post('PolicyLink'),
+			'PolicyText' => $this->input->post('PolicyText'),
+			'what_we_can_put_up' => $this->input->post('what_we_can_put_up'),
+			'what_we_need_to_add' => $this->input->post('what_we_need_to_add'),
+			'embargo' => $this->input->post('embargo'),
+			'notes' => $this->input->post('notes')
+		);
 		$newPubID = $this-> Publishers_model-> insert_publisher($PubInfo);
 		
 		$this->load->helper('url');
@@ -73,7 +81,17 @@ class Publishers extends CI_Controller {
 	
 	public function update()
 	{
-		$PubInfo = $this->input->post();
+		$PubInfo = array(
+			'PubID' => $this->input->post('PubID'),
+			'PubName' => $this->input->post('PubName'),
+			'PolicyLink' => $this->input->post('PolicyLink'),
+			'PolicyText' => $this->input->post('PolicyText'),
+			'what_we_can_put_up' => $this->input->post('what_we_can_put_up'),
+			'what_we_need_to_add' => $this->input->post('what_we_need_to_add'),
+			'embargo' => $this->input->post('embargo'),
+			'notes' => $this->input->post('notes')
+		);
+		
 		$PubID = $this-> Publishers_model-> update_publisher($PubInfo);
 		
 		$this->load->helper('url');
@@ -94,5 +112,6 @@ class Publishers extends CI_Controller {
 		$this->load->helper('url');
 		redirect('publishers');
 	}
-//This is a comment
 }
+
+?>

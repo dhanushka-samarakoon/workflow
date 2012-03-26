@@ -28,48 +28,17 @@ class Tasks_model extends CI_Model {
 		return $query->row_array();
 	}
 	
-	public function insert_task()
+	public function insert_task($data)
 	{
-		$this->load->helper('date');
-		$datestring = "%Y-%m-%d";
-		
-		$data = array(
-			'Title' => $this->input->post('Title'),
-			'Author' => $this->input->post('Author'),
-			'KSUAuthors' => $this->input->post('KSUAuthors'),
-			'PubID' => $this->input->post('Publishers'),
-			'StatusID' => $this->input->post('Status'),
-			'UserID' => $this->input->post('User'),
-			'Notes' => $this->input->post('Notes'),
-			'FileNames' => $this->input->post('FileNames'),
-			'CreatedDate' => mdate($datestring, now()),
-			'LastUpdatedDate' => mdate($datestring, now())
-		);
-		
 		$this->db->insert('Tasks', $data);
 		return $this->db->insert_id();
 	}
 	
-	public function update_task($TaskInfo = FALSE)
+	public function update_task($data)
 	{
-		$this->load->helper('date');
-		$datestring = "%Y-%m-%d";
-		
-		$data = array(
-			'Title' => $this->input->post('Title'),
-			'Author' => $this->input->post('Author'),
-			'KSUAuthors' => $this->input->post('KSUAuthors'),
-			'PubID' => $this->input->post('Publishers'),
-			'StatusID' => $this->input->post('Status'),
-			'UserID' => $this->input->post('Users'),
-			'Notes' => $this->input->post('Notes'),
-			'FileNames' => $this->input->post('FileNames'),
-			'LastUpdatedDate' => mdate($datestring, now())
-		);
-		
-		$this->db->where('TaskID', $TaskInfo['TaskID']);
+		$this->db->where('TaskID', $data['TaskID']);
 		$this->db->update('Tasks', $data);
-		return $TaskInfo['TaskID'];
+		return $data['TaskID'];
 	}
 	
 	public function get_status($StatusID = FALSE)
@@ -84,3 +53,5 @@ class Tasks_model extends CI_Model {
 		return $query->row_array();
 	}
 }
+
+?>

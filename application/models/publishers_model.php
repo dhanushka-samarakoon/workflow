@@ -18,36 +18,22 @@ class Publishers_model extends CI_Model {
 		return $query->row_array();
 	}
 	
-	public function insert_publisher()
+	public function get_publisher_byname($PubName)
 	{
-		$data = array(
-			'PubName' => $this->input->post('PubName'),
-			'PolicyLink' => $this->input->post('PolicyLink'),
-			'PolicyText' => $this->input->post('PolicyText'),
-			'what_we_can_put_up' => $this->input->post('what_we_can_put_up'),
-			'what_we_need_to_add' => $this->input->post('what_we_need_to_add'),
-			'embargo' => $this->input->post('embargo'),
-			'notes' => $this->input->post('notes')
-		);
-		
+		$query = $this->db->query('SELECT * FROM Publishers WHERE PubName="'.$PubName.'"');
+		return $query->row_array();
+	}
+	
+	public function insert_publisher($data)
+	{
 		$this->db->insert('Publishers', $data);
 		return $this->db->insert_id();
 	}
 	
-	public function update_publisher($PubInfo = FALSE)
+	public function update_publisher($PubInfo)
 	{
-		$data = array(
-			'PubName' => $this->input->post('PubName'),
-			'PolicyLink' => $this->input->post('PolicyLink'),
-			'PolicyText' => $this->input->post('PolicyText'),
-			'what_we_can_put_up' => $this->input->post('what_we_can_put_up'),
-			'what_we_need_to_add' => $this->input->post('what_we_need_to_add'),
-			'embargo' => $this->input->post('embargo'),
-			'notes' => $this->input->post('notes')
-		);
-		
 		$this->db->where('PubID', $PubInfo['PubID']);
-		$this->db->update('Publishers', $data);
+		$this->db->update('Publishers', $PubInfo);
 		return $PubInfo['PubID'];
 	}
 	
@@ -57,3 +43,5 @@ class Publishers_model extends CI_Model {
 		$this->db->delete('Publishers');
 	}
 }
+
+?>
