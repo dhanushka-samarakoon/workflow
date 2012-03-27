@@ -28,10 +28,21 @@ class Tasks_model extends CI_Model {
 		return $query->row_array();
 	}
 	
+	public function get_metadatakeys()
+	{
+		$query = $this->db->query('SELECT * FROM MetaDataKey');
+		return $query;
+	}
+	
 	public function insert_task($data)
 	{
 		$this->db->insert('Tasks', $data);
 		return $this->db->insert_id();
+	}
+	
+	public function insert_metadata_batch($data)
+	{
+		return $this->db->insert_batch('MetaDataValues', $data);
 	}
 	
 	public function update_task($data)
