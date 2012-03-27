@@ -5,10 +5,14 @@ class Publishers extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Publishers_model');
+		$this->load->model('Users_model');
 	}
 
 	public function index()
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		$data['publishers'] = $this->Publishers_model->get_publishers();
 		$data['title'] = 'Publishers List';
 	
@@ -19,6 +23,9 @@ class Publishers extends CI_Controller {
 	
 	public function view($PubID)
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		$data['publisher'] = $this-> Publishers_model-> get_publishers($PubID);
 		
 		if (empty($data['publisher']))
@@ -35,6 +42,9 @@ class Publishers extends CI_Controller {
 	
 	public function add()
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		$this->load->helper('form');
 		
 		$data['title'] = 'Add a Publisher';
@@ -63,6 +73,9 @@ class Publishers extends CI_Controller {
 	
 	public function edit($PubID)
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		$data['publisher'] = $this-> Publishers_model-> get_publishers($PubID);
 		
 		if (empty($data['publisher']))
@@ -100,6 +113,9 @@ class Publishers extends CI_Controller {
 	
 	public function remove($PubID)
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		$data['publisher'] = $this-> Publishers_model-> get_publishers($PubID);
 		
 		if (empty($data['publisher']))

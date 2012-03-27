@@ -5,12 +5,16 @@ class Refworks extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Refworks_model');
+		$this->load->model('Users_model');
 		
 		$this->load->helper(array('form', 'url'));
 	}
 
 	public function index()
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		$data['title'] = 'Refworks Files';
 		$data['files'] = $this->Refworks_model->get_files();
 		
@@ -20,7 +24,7 @@ class Refworks extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
-	function do_upload()
+	public function do_upload()
 	{
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'xml|XML|Xml';
@@ -56,6 +60,9 @@ class Refworks extends CI_Controller {
 	
 	public function insert()
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		$this->load->library('simplexml');
 		
 		//$this->load->helper('file');

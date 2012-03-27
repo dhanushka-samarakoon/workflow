@@ -11,6 +11,9 @@ class Tasks extends CI_Controller {
 
 	public function index()
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		$data['tasks'] = $this->Tasks_model->get_tasks();
 		$data['title'] = 'Task List';
 	
@@ -21,6 +24,9 @@ class Tasks extends CI_Controller {
 	
 	public function add()
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		//Get a List of Publishers
 		$publishers = $this->Publishers_model->get_publishers();
 		$PublishersArray = array();
@@ -79,6 +85,9 @@ class Tasks extends CI_Controller {
 	
 	public function edit($TaskID)
 	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
 		//Get a List of Publishers
 		$publishers = $this->Publishers_model->get_publishers();
 		$PublishersArray = array();
