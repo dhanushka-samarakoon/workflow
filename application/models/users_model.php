@@ -39,6 +39,19 @@ class Users_model extends CI_Model {
 		$query = $this->db->query('SELECT * FROM Users WHERE UserName="'.$UserName.'"');
 		return $query->row_array();
 	}
+	
+	public function insert_user($data)
+	{
+		$this->db->insert('Users', $data);
+		return $this->db->insert_id();
+	}
+	
+	public function update_user($UserInfo)
+	{
+		$this->db->where('UserID', $UserInfo['UserID']);
+		$this->db->update('Users', $UserInfo);
+		return $UserInfo['UserID'];
+	}
 }
 
 ?>

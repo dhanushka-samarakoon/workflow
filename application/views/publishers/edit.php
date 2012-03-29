@@ -92,13 +92,13 @@
 		
 		
 		<?php
-				$data = array(
-				  'name'        => 'PubSubmit',
-				  'id'          => 'PubSubmit',
-				  'value'		=> 'Save Publisher',
-				  'class'       => 'btn btn-success'
-				);
-			?>
+			$data = array(
+			  'name'        => 'PubSubmit',
+			  'id'          => 'PubSubmit',
+			  'value'		=> 'Save Publisher',
+			  'class'       => 'btn btn-success'
+			);
+		?>
 		<?php echo form_submit($data);  ?>
 		<?php echo form_close(); ?>
 	</div>

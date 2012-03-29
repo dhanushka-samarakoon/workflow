@@ -1,4 +1,7 @@
 <?php echo form_open('users/insert'); ?>
+<?php echo 'User Name'; ?>: 
+<?php echo form_input('UserName'); ?>
+<br/>
 <?php echo 'User email'; ?>: 
 <?php echo form_input('UserEmail'); ?>
 </br>

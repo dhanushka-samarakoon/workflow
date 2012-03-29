@@ -17,22 +17,25 @@ class Refworks extends CI_Controller {
 		
 		$data['title'] = 'Refworks Files';
 		$data['files'] = $this->Refworks_model->get_files();
+		
 		$feedbackArray = array();
-		array_push($feedbackArray,array('message' => 'test 1', 'message_type' => 'error'));
-		array_push($feedbackArray,array('message' => 'test 2', 'message_type' => 'up'));
 		$data['feedback'] = $feedbackArray;
 		
 		$this->load->view('templates/header', $data);
-		//$this->load->view('refworks/upload_form', array('message' => '', 'message_type' => ''));
 		$this->load->view('refworks/index', $data);
 		$this->load->view('templates/footer');
 	}
 	
 	public function do_upload()
 	{
+		if(empty($_POST)){
+			$this->load->helper('url');
+			redirect('refworks');
+		}
+		
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'xml|XML|Xml';
-		$config['max_size']	= '1000';
+		$config['max_size']	= '10000';
 
 		$this->load->library('upload', $config);
 
@@ -42,10 +45,12 @@ class Refworks extends CI_Controller {
 			$data['title'] = 'Refworks Files';
 			$data['files'] = $this->Refworks_model->get_files();
 			
+			$feedbackArray = array();
+			array_push($feedbackArray,array('message' => $this->upload->display_errors(), 'message_type' => 'error'));
+			$data['feedback'] = $feedbackArray;
+		
 			$this->load->view('templates/header', $data);
-			$data = array('message' => $this->upload->display_messages(), 'message_type' => 'fail');
-			$this->load->view('refworks/upload_form', $data);
-			$this->load->view('refworks/file_list', $data);
+			$this->load->view('refworks/index', $data);
 			$this->load->view('templates/footer');
 		}
 		else
@@ -54,10 +59,12 @@ class Refworks extends CI_Controller {
 			$data['title'] = 'Refworks Files';
 			$data['files'] = $this->Refworks_model->get_files();
 			
+			$feedbackArray = array();
+			array_push($feedbackArray,array('message' => 'File Uploaded', 'message_type' => 'success'));
+			$data['feedback'] = $feedbackArray;
+			
 			$this->load->view('templates/header', $data);
-			$data = array('message' => 'File Uploaded', 'message_type' => 'success');
-			$this->load->view('refworks/upload_form', $data);
-			$this->load->view('refworks/file_list', $data);
+			$this->load->view('refworks/index', $data);
 			$this->load->view('templates/footer');
 		}
 	}

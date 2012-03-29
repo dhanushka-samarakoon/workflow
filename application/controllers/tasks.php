@@ -62,6 +62,11 @@ class Tasks extends CI_Controller {
 	
 	public function insert()
 	{
+		if(empty($_POST)){
+			$this->load->helper('url');
+			redirect('tasks/add');
+		}
+		
 		$this->load->helper('date');
 		$datestring = "%Y-%m-%d";
 		
@@ -131,6 +136,11 @@ class Tasks extends CI_Controller {
 	
 	public function update()
 	{
+		if(empty($_POST)){
+			$this->load->helper('url');
+			redirect('tasks');
+		}
+		
 		$this->load->helper('date');
 		$datestring = "%Y-%m-%d";
 		

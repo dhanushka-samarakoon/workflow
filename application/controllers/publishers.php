@@ -56,6 +56,11 @@ class Publishers extends CI_Controller {
 	
 	public function insert()
 	{
+		if(empty($_POST)){
+			$this->load->helper('url');
+			redirect('publishers/add');
+		}
+		
 		$PubInfo = array(
 			'PubName' => $this->input->post('PubName'),
 			'PolicyLink' => $this->input->post('PolicyLink'),
@@ -94,6 +99,11 @@ class Publishers extends CI_Controller {
 	
 	public function update()
 	{
+		if(empty($_POST)){
+			$this->load->helper('url');
+			redirect('publishers');
+		}
+		
 		$PubInfo = array(
 			'PubID' => $this->input->post('PubID'),
 			'PubName' => $this->input->post('PubName'),

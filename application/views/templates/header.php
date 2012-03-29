@@ -20,7 +20,7 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="#">Workflow Managment System</a>
+				<a class="brand" href="<?php echo base_url(); ?>">Workflow Managment System</a>
 				<ul class="nav">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle"	data-toggle="dropdown">Tasks<b class="caret"></b></a>
@@ -38,7 +38,9 @@
 					</li>
 					<li><a href="<?php echo site_url('refworks');?>">RefWorks</a></li>
 				</ul>
-				<p class="navbar-text pull-right">Logged in as <a href="#"><?php //if(isset($this->session)) {$this->session->userdata('user');}?></a></p>
+				<p class="navbar-text pull-right">
+					<a href="<?php echo site_url('users/logout');?>">Log Out</a>
+				</p>
 			</div>
 		</div>
 	</div>
