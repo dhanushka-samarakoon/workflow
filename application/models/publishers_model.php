@@ -10,7 +10,7 @@ class Publishers_model extends CI_Model {
 	{
 		if ($PubID === FALSE)
 		{
-			$query = $this->db->query('SELECT * FROM Publishers ORDER BY PubName ASC');
+			$query = $this->db->query('SELECT * FROM Publishers WHERE PubID!=0 ORDER BY PubName ASC');
 			return $query;
 		}
 		
@@ -39,8 +39,14 @@ class Publishers_model extends CI_Model {
 	
 	public function delete_publisher($PubID = FALSE)
 	{
-		$this->db->where('PubID', $PubID);
-		$this->db->delete('Publishers');
+		$query = $this->db->get_where('Tasks', array('PubID' => $PubID ));
+		$results = $query->row_array();
+		if (count($results)<=0){
+			$this->db->where('PubID', $PubID);
+			$this->db->delete('Publishers');
+			return true;
+		}
+		return false;
 	}
 }
 

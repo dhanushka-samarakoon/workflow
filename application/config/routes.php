@@ -37,19 +37,7 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
-$route['tasks/add'] = 'tasks/add';
-$route['tasks'] = 'tasks';
-$route['tasks/edit/(:any)'] = 'tasks/edit/$1';
-
-$route['publishers/add'] = 'publishers/add';
-$route['publishers/insert'] = 'publishers/insert';
-$route['publishers/edit/(:any)'] = 'publishers/edit/$1';
-$route['publishers/remove/(:any)'] = 'publishers/remove/$1';
-$route['publishers/view/(:any)'] = 'publishers/view/$1';
-$route['publishers'] = 'publishers';
-
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "tasks";
 $route['404_override'] = '';
 
 

@@ -17,10 +17,14 @@ class Refworks extends CI_Controller {
 		
 		$data['title'] = 'Refworks Files';
 		$data['files'] = $this->Refworks_model->get_files();
+		$feedbackArray = array();
+		array_push($feedbackArray,array('message' => 'test 1', 'message_type' => 'error'));
+		array_push($feedbackArray,array('message' => 'test 2', 'message_type' => 'up'));
+		$data['feedback'] = $feedbackArray;
 		
 		$this->load->view('templates/header', $data);
-		$this->load->view('refworks/upload_form', array('message' => '', 'message_type' => ''));
-		$this->load->view('refworks/file_list', $data);
+		//$this->load->view('refworks/upload_form', array('message' => '', 'message_type' => ''));
+		$this->load->view('refworks/index', $data);
 		$this->load->view('templates/footer');
 	}
 	

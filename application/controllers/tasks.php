@@ -113,6 +113,7 @@ class Tasks extends CI_Controller {
 		$data['Users'] = $UsersArray;
 		
 		$data['task'] = $this-> Tasks_model-> get_tasks($TaskID);
+		$data['metadata'] = $this-> Tasks_model-> get_task_metadata($TaskID);
 		
 		if (empty($data['task']))
 		{

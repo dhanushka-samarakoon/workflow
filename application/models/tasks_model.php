@@ -28,6 +28,15 @@ class Tasks_model extends CI_Model {
 		return $query->row_array();
 	}
 	
+	public function get_task_metadata($TaskID)
+	{
+		$query = $this->db->query('SELECT MetaDataValues.TaskID, MetaDataKey.MetaDataName, MetaDataValues.MetaDataValue
+						FROM MetaDataValues, MetaDataKey
+						WHERE MetaDataValues.MetaDataID=MetaDataKey.MetaDataID
+						AND MetaDataValues.TaskID='.$TaskID.' ORDER BY MetaDataOrder');
+		return $query;
+	}
+	
 	public function get_metadatakeys()
 	{
 		$query = $this->db->query('SELECT * FROM MetaDataKey');

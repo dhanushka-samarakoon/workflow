@@ -21,14 +21,24 @@ class Users_model extends CI_Model {
 	{
 		if ($UserID === FALSE)
 		{
-			$query = $this->db->query('SELECT * FROM Users WHERE UserID!=0');
+			$query = $this->db->query('SELECT * FROM Users');
 			return $query;
 		}
 		
-		$query = $this->db->query('SELECT * FROM Publishers WHERE PubID='.$UserID);
+		$query = $this->db->query('SELECT * FROM Users WHERE UserID='.$UserID);
 		return $query->row_array();
 	}
 	
+	public function get_user_byusername($UserName = FALSE)
+	{
+		if ($UserName === FALSE)
+		{
+			return false;
+		}
+		
+		$query = $this->db->query('SELECT * FROM Users WHERE UserName="'.$UserName.'"');
+		return $query->row_array();
+	}
 }
 
 ?>

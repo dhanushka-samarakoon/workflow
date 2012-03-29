@@ -123,7 +123,7 @@ class Publishers extends CI_Controller {
 			show_404();
 		}
 		
-		$PubID = $this-> Publishers_model-> delete_publisher($PubID);
+		$isDeleted = $this-> Publishers_model-> delete_publisher($PubID);
 		
 		$this->load->helper('url');
 		redirect('publishers');

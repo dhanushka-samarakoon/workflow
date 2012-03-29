@@ -5,5 +5,5 @@
 <?php echo 'password'; ?>: 
 <?php echo form_input('UserPass'); ?>
 </br>
-<?php echo form_submit('UsersSubmit','Add User');  ?>
+<?php echo form_submit('UsersSubmit','Login');  ?>
 <?php echo form_close(); ?>
