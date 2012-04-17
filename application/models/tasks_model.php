@@ -28,6 +28,39 @@ class Tasks_model extends CI_Model {
 		return $query->row_array();
 	}
 	
+	public function get_tasks_by_month($StartDate = FALSE, $EndDate = FALSE)
+	{
+		if ($StartDate === FALSE OR $EndDate == FALSE)
+		{
+			$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
+							FROM Tasks 
+							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
+			return $query;
+		}
+		$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
+							FROM Tasks 
+							WHERE CreatedDate >= "'.$StartDate.'" AND CreatedDate <= "'.$EndDate.'" 
+							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
+		return $query;
+	}
+	
+	public function get_tasks_closed_by_month($StartDate = FALSE, $EndDate = FALSE)
+	{
+		if ($StartDate === FALSE OR $EndDate == FALSE)
+		{
+			$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
+							FROM Tasks 
+							WHERE Tasks.StatusID=-1
+							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
+			return $query;
+		}
+		$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
+							FROM Tasks 
+							WHERE CreatedDate >= "'.$StartDate.'" AND CreatedDate <= "'.$EndDate.'" AND Tasks.StatusID=-1
+							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
+		return $query;
+	}
+	
 	public function get_task_metadata($TaskID)
 	{
 		$query = $this->db->query('SELECT MetaDataValues.TaskID, MetaDataKey.MetaDataName, MetaDataValues.MetaDataValue

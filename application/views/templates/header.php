@@ -11,10 +11,12 @@
 	<link type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css" rel="stylesheet" />
 	<link type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 	<link type="text/css" href="<?php echo base_url(); ?>assets/DataTables/css/DT_bootstrap.css" rel="stylesheet" >
+	<link type="text/css" href="<?php echo base_url(); ?>assets/JQuery/css/ui-lightness/jquery-ui-1.8.19.custom.css" rel="stylesheet" />
 	
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/bootstrap/js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/JQuery/js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/DataTables/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/DataTables/js/DT_bootstrap.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/JQuery/js/jquery-ui-1.8.19.custom.min.js"></script>
 </head>
 <body>
 	<div class="navbar navbar-fixed-top">
@@ -36,6 +38,7 @@
 							<li><a href="<?php echo site_url('publishers/add');?>">Add new Publisher </a></li>
 						</ul>
 					</li>
+					<li><a href="<?php echo site_url('reports');?>">Reports</a></li>
 					<li><a href="<?php echo site_url('refworks');?>">RefWorks</a></li>
 				</ul>
 				<p class="navbar-text pull-right">
