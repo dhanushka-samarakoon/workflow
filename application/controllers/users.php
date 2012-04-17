@@ -111,6 +111,10 @@ class Users extends CI_Controller {
 		}
 		
 		$user = $this->Users_model->get_user_byusername($this->input->post('UserName'));
+		if ($user==null){
+			$this->load->helper('url');
+			redirect('users/login');
+		}
 		if (strcmp(do_hash($this->input->post('UserPass'),'md5'),$user['user_pass'])==0){
 				$sessionInfo = array(
 					'logged_in' => TRUE,
