@@ -26,6 +26,7 @@
 				'value'       => $file['name'],
 				'checked'     => TRUE
 				);
+                                if ($file['name']=='processed'){continue;}
 				echo '<tr>';
 				echo '<td>'.form_radio($data).'</td>';
 				echo '<td>'.$file['name'].'</td>';

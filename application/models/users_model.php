@@ -21,7 +21,7 @@ class Users_model extends CI_Model {
 	{
 		if ($UserID === FALSE)
 		{
-			$query = $this->db->query('SELECT * FROM Users');
+			$query = $this->db->query('SELECT * FROM Users WHERE UserID!=-1');
 			return $query;
 		}
 		

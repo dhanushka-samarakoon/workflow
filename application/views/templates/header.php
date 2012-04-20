@@ -29,6 +29,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="<?php echo site_url('tasks');?>">View all Tasks</a></li>
 							<li><a href="<?php echo site_url('tasks/add');?>">Add new Task</a></li>
+                                                        <li><a href="<?php echo site_url('tasks/closed');?>">View closed  Tasks</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">

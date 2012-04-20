@@ -6,16 +6,27 @@ class Tasks_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	public function get_tasks($TaskID = FALSE)
+	public function get_tasks($TaskID = FALSE, $Closed = FALSE)
 	{
-		if ($TaskID === FALSE)
+		if ($TaskID === FALSE && $Closed === FALSE)
 		{
 			$query = $this->db->query('SELECT TaskID, Title, Author, KSUAuthors, Tasks.PubID, Tasks.StatusID, status_desc, 
 							Tasks.UserID, UserName, FirstName, LastName, user_email, Notes, FileNames, CreatedDate, LastUpdatedDate 
 						FROM Tasks, Status, Users 
 						WHERE Tasks.StatusID = Status.StatusID 
 						AND Tasks.UserID = Users.UserID 
-						AND Tasks.StatusID!=-1 ORDER BY TaskID ASC');
+						AND Tasks.StatusID>=0 ORDER BY TaskID ASC');
+			return $query;
+		}
+                
+                if ($TaskID === FALSE && $Closed === TRUE)
+		{
+			$query = $this->db->query('SELECT TaskID, Title, Author, KSUAuthors, Tasks.PubID, Tasks.StatusID, status_desc, 
+							Tasks.UserID, UserName, FirstName, LastName, user_email, Notes, FileNames, CreatedDate, LastUpdatedDate 
+						FROM Tasks, Status, Users 
+						WHERE Tasks.StatusID = Status.StatusID 
+						AND Tasks.UserID = Users.UserID 
+						AND Tasks.StatusID<0 ORDER BY TaskID ASC');
 			return $query;
 		}
 		
@@ -28,35 +39,44 @@ class Tasks_model extends CI_Model {
 		return $query->row_array();
 	}
 	
-	public function get_tasks_by_month($StartDate = FALSE, $EndDate = FALSE)
+	public function get_tasks_by_month($InsertedVia, $StartDate = FALSE, $EndDate = FALSE)
 	{
 		if ($StartDate === FALSE OR $EndDate == FALSE)
 		{
 			$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
 							FROM Tasks 
+                                                        WHERE InsertedVia="'.$InsertedVia.'" 
 							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
 			return $query;
 		}
 		$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
 							FROM Tasks 
-							WHERE CreatedDate >= "'.$StartDate.'" AND CreatedDate <= "'.$EndDate.'" 
+							WHERE InsertedVia="'.$InsertedVia.'"
+                                                            AND CreatedDate >= "'.$StartDate.'" 
+                                                            AND CreatedDate <= "'.$EndDate.'" 
 							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
 		return $query;
 	}
 	
-	public function get_tasks_closed_by_month($StartDate = FALSE, $EndDate = FALSE)
+	public function get_tasks_closed_by_month($InsertedVia, $StartDate = FALSE, $EndDate = FALSE)
 	{
 		if ($StartDate === FALSE OR $EndDate == FALSE)
 		{
-			$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
-							FROM Tasks 
-							WHERE Tasks.StatusID=-1
-							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
+			$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, Status.StatusID AS ID, Status.status_desc, COUNT( * ) Total 
+                                                        FROM Tasks, Status 
+                                                        WHERE InsertedVia="'.$InsertedVia.'" 
+                                                            AND Tasks.StatusID<0 
+                                                            AND Tasks.StatusID=Status.StatusID
+                                                        GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC, Tasks.StatusID');
 			return $query;
 		}
-		$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
-							FROM Tasks 
-							WHERE CreatedDate >= "'.$StartDate.'" AND CreatedDate <= "'.$EndDate.'" AND Tasks.StatusID=-1
+		$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, Status.StatusID AS ID, Status.status_desc, COUNT( * ) Total 
+							FROM Tasks, Status 
+							WHERE InsertedVia="'.$InsertedVia.'" 
+                                                            AND Tasks.StatusID<0 
+                                                            AND Tasks.StatusID=Status.StatusID 
+                                                            AND CreatedDate >= "'.$StartDate.'" 
+                                                            AND CreatedDate <= "'.$EndDate.'" 
 							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
 		return $query;
 	}

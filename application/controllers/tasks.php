@@ -21,6 +21,19 @@ class Tasks extends CI_Controller {
 		$this->load->view('tasks/index', $data);
 		$this->load->view('templates/footer');
 	}
+        
+        public function closed()
+	{
+		//Redirect to login page, if NOT logged in
+		$this->Users_model->is_logged();
+		
+		$data['tasks'] = $this->Tasks_model->get_tasks(FALSE, TRUE);
+		$data['title'] = 'Cloed Task List';
+	
+		$this->load->view('templates/header', $data);
+		$this->load->view('tasks/index', $data);
+		$this->load->view('templates/footer');
+	}
 	
 	public function add()
 	{
@@ -79,6 +92,7 @@ class Tasks extends CI_Controller {
 			'UserID' => $this->input->post('User'),
 			'Notes' => $this->input->post('Notes'),
 			'FileNames' => $this->input->post('FileNames'),
+                        'InsertedVia' => 'Form',
 			'CreatedDate' => mdate($datestring, now()),
 			'LastUpdatedDate' => mdate($datestring, now())
 		);

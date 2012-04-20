@@ -19,14 +19,15 @@ class Refworks_model extends CI_Model {
 	
 	public function move_file($fileName)
 	{
-		$fileString = read_file('./uploads/'.$fileName);
-		if (!write_file('./uploads/processed/'.$fileName, $fileString)){
-			return false;
-		}else{
-			//FILES NOT BEEN DELETED. CHECK PERMISSIONS
-			delete_files('./uploads/'.$fileName);
-			return true;
-		}
+//		$fileString = read_file('./uploads/'.$fileName);
+//		if (!write_file('./uploads/processed/'.$fileName, $fileString)){
+//			return false;
+//		}else{
+//			//FILES NOT BEEN DELETED. CHECK PERMISSIONS
+//			delete_files('./uploads/'.$fileName);
+//			return true;
+//		}
+                rename(getcwd().'/uploads/'.$fileName ,getcwd().'/uploads/processed/'.$fileName);
 	}
 }
 
