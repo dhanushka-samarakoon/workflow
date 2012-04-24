@@ -66,10 +66,35 @@ class Reports extends CI_Controller {
 		$startDate = $this->input->post('startDate');
 		$endDate = $this->input->post('endDate');
 		
-                $data['form_tasks']             = $this->Tasks_model->get_tasks_by_month('Form',$startDate, $endDate);
-                $data['refworks_tasks']         = $this->Tasks_model->get_tasks_by_month('Refworks',$startDate, $endDate);
-		$data['form_tasks_closed']      = $this->Tasks_model->get_tasks_closed_by_month('Form',$startDate, $endDate);
-                $data['refworks_tasks_closed']  = $this->Tasks_model->get_tasks_closed_by_month('Refworks',$startDate, $endDate);
+                $data['form_tasks']     = $this->Tasks_model->get_tasks_by_month('Form',$startDate, $endDate);
+                $data['refworks_tasks'] = $this->Tasks_model->get_tasks_by_month('Refworks',$startDate, $endDate);
+		
+                $form_tasks_closed      = $this->Tasks_model->get_tasks_closed_by_month('Form',$startDate, $endDate);
+                $TableArr = array();
+                foreach ($form_tasks_closed->result_array() as $task){ 
+                    $Year   = $task['Year'];
+                    $Month  = $task['Month'];
+                    $ID     = $task['ID'];
+                    $Total  = $task['Total'];
+
+                    $TableArr[$Year.' - '.$Month]['Name'] = $Year.' - '.$Month;
+                    $TableArr[$Year.' - '.$Month][$ID] = $Total;
+                }
+		$data['form_tasks_closed'] = $TableArr;
+                
+                $refworks_tasks_closed  = $this->Tasks_model->get_tasks_closed_by_month('Refworks',$startDate, $endDate);
+                $TableArr = array();
+                foreach ($refworks_tasks_closed->result_array() as $task){ 
+                    $Year   = $task['Year'];
+                    $Month  = $task['Month'];
+                    $ID     = $task['ID'];
+                    $Total  = $task['Total'];
+
+                    $TableArr[$Year.' - '.$Month]['Name'] = $Year.' - '.$Month;
+                    $TableArr[$Year.' - '.$Month][$ID] = $Total;
+                }
+                $data['refworks_tasks_closed']  = $TableArr;
+                
 		$data['title'] = 'Task Report';
 		
 		$feedbackArray = array();

@@ -115,7 +115,7 @@
 	</div>
 	
 	<div class="span8 well">
-                <strong>Closed Tasks created by Form</strong>
+                <strong>Closed Tasks created by Refworks</strong>
 		<table class="table table-condensed table-striped">
 			<thead>
 				<tr>
