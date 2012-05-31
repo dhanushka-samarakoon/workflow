@@ -87,13 +87,18 @@
 			<?php 
 				$authors = explode(';', $task['KSUAuthors']); 
 				foreach ($authors as $author){
-					echo '<li>'.$author.'</li>';
+					if($author!=''){
+						echo '<li>'.$author.'</li>';
+					}
 				}
 			?>
 			</ul><hr/>
 		<?php endif ?>
 		<dl class="dl-horizontal">
 			<?php
+				echo '<dt>Inserted Via</dt>';
+				echo '<dd>'.$task['InsertedVia'].'</dd>';
+					
 				foreach($metadata->result_array() as $item){
 					echo '<dt>'.$item['MetaDataName'].'</dt>';
 					echo '<dd>'.$item['MetaDataValue'].'</dd>';

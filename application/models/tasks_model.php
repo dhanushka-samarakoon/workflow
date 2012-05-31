@@ -31,7 +31,7 @@ class Tasks_model extends CI_Model {
 		}
 		
 		$query = $this->db->query('SELECT TaskID, Title, Author, KSUAuthors, Tasks.PubID, Tasks.StatusID, status_desc, 
-							Tasks.UserID, UserName, FirstName, LastName, user_email, Notes, FileNames, CreatedDate, LastUpdatedDate  
+							Tasks.UserID, UserName, FirstName, LastName, user_email, Notes, InsertedVia, FileNames, CreatedDate, LastUpdatedDate  
 						FROM Tasks, Status, Users 
 						WHERE Tasks.StatusID = Status.StatusID 
 						AND Tasks.UserID = Users.UserID 
@@ -45,15 +45,15 @@ class Tasks_model extends CI_Model {
 		{
 			$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
 							FROM Tasks 
-                                                        WHERE InsertedVia="'.$InsertedVia.'" 
+                            WHERE InsertedVia="'.$InsertedVia.'" 
 							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
 			return $query;
 		}
 		$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, COUNT( * ) Total 
 							FROM Tasks 
 							WHERE InsertedVia="'.$InsertedVia.'"
-                                                            AND CreatedDate >= "'.$StartDate.'" 
-                                                            AND CreatedDate <= "'.$EndDate.'" 
+                            AND CreatedDate >= "'.$StartDate.'" 
+                            AND CreatedDate <= "'.$EndDate.'" 
 							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
 		return $query;
 	}
@@ -62,22 +62,22 @@ class Tasks_model extends CI_Model {
 	{
 		if ($StartDate === FALSE OR $EndDate == FALSE)
 		{
-			$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, Status.StatusID AS ID, Status.status_desc, COUNT( * ) Total 
-                                                        FROM Tasks, Status 
-                                                        WHERE InsertedVia="'.$InsertedVia.'" 
-                                                            AND Tasks.StatusID<0 
-                                                            AND Tasks.StatusID=Status.StatusID
-                                                        GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC, Tasks.StatusID');
+			$query = $this->db->query('SELECT MONTHNAME(Tasks.LastUpdatedDate) AS Month , YEAR(Tasks.LastUpdatedDate) AS Year, Status.StatusID AS ID, Status.status_desc, COUNT( * ) Total 
+										FROM Tasks, Status 
+										WHERE InsertedVia="'.$InsertedVia.'" 
+											AND Tasks.StatusID<0 
+											AND Tasks.StatusID=Status.StatusID
+										GROUP BY YEAR( Tasks.LastUpdatedDate) DESC, MONTH(Tasks.LastUpdatedDate) DESC, Tasks.StatusID');
 			return $query;
 		}
-		$query = $this->db->query('SELECT MONTHNAME(Tasks.CreatedDate) AS Month , YEAR(Tasks.CreatedDate) AS Year, Status.StatusID AS ID, Status.status_desc, COUNT( * ) Total 
+		$query = $this->db->query('SELECT MONTHNAME(Tasks.LastUpdatedDate) AS Month , YEAR(Tasks.LastUpdatedDate) AS Year, Status.StatusID AS ID, Status.status_desc, COUNT( * ) Total 
 							FROM Tasks, Status 
 							WHERE InsertedVia="'.$InsertedVia.'" 
-                                                            AND Tasks.StatusID<0 
-                                                            AND Tasks.StatusID=Status.StatusID 
-                                                            AND CreatedDate >= "'.$StartDate.'" 
-                                                            AND CreatedDate <= "'.$EndDate.'" 
-							GROUP BY YEAR( Tasks.CreatedDate) DESC, MONTH(Tasks.CreatedDate) DESC');
+								AND Tasks.StatusID<0 
+								AND Tasks.StatusID=Status.StatusID 
+								AND LastUpdatedDate >= "'.$StartDate.'" 
+								AND LastUpdatedDate <= "'.$EndDate.'" 
+							GROUP BY YEAR( Tasks.LastUpdatedDate) DESC, MONTH(Tasks.LastUpdatedDate) DESC, Tasks.StatusID');
 		return $query;
 	}
 	

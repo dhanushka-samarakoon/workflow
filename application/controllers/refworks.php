@@ -79,7 +79,7 @@ class Refworks extends CI_Controller {
                     redirect('refworks');
 		}
                 
-		$this->load->library('simplexml');
+		//$this->load->library('simplexml');
 		
 		//$this->load->helper('file');
 		$this->load->helper('array');
@@ -89,28 +89,26 @@ class Refworks extends CI_Controller {
 		$this->load->model('Publishers_model');
 		$this->load->model('Tasks_model');
 		
-		$TitleXMLKey		= 't1';
-		$PubXMLKey		= 'pb';
+		$TitleXMLKey			= 't1';
+		$PubXMLKey			= 'pb';
 		$KSUContactXMLKey	= 'u2';
 		$KSUAuthorsXMLKey	= 'u1';
 		
 		$datestring = "%Y-%m-%d";
-		$NEW_STATUS = 1;
+		$NEW_STATUS = 10;
 		$isSuccess = true;
                 
 		$fileName = $this->input->post('RefworksFile');
 		$RefworksXML = $this->Refworks_model->get_file($fileName);
-		$RefworksArr = $this->simplexml->xml_parse($RefworksXML);
-		$refs = $RefworksArr['reference'];
+		$refs = new SimpleXMLElement($RefworksXML);
 		
-		//$UploadStatusArray = array();
                 $feedbackArray = array();
 		
-		foreach( $refs as $ref ){
-			$title = element($TitleXMLKey,$ref);
-			$publisher = element($PubXMLKey,$ref);
-			$KSUContact = element($KSUContactXMLKey,$ref);
-			$KSUAuthors = element($KSUAuthorsXMLKey,$ref);
+		foreach( $refs->reference as $ref ){
+			$title = (string)$ref->$TitleXMLKey;
+			$publisher = (string)$ref->$PubXMLKey;
+			$KSUContact = (string)$ref->$KSUContactXMLKey;
+			$KSUAuthors = (string)$ref->$KSUAuthorsXMLKey;
 			$PubID = 0;
                         
 			if(trim($publisher)!=''){
@@ -120,7 +118,7 @@ class Refworks extends CI_Controller {
 					//Insert Publisher and get ID
 					$PubInfo = array('PubName' => $publisher);
 					$newPubID = $this-> Publishers_model-> insert_publisher($PubInfo);
-                                        if($newPubID>0){
+                                        if(!($newPubID>0)){
                                             $isSuccess = false;
                                             array_push($feedbackArray,array('message' => 'Insert Publisher '.$PubInfo['PubName'].' failed', 'message_type' => 'error'));
                                          }
@@ -143,7 +141,7 @@ class Refworks extends CI_Controller {
 				'LastUpdatedDate' => mdate($datestring, now())
 			);
 			$newTaskID = $this-> Tasks_model-> insert_task($TaskInfo);
-			if($newTaskID>0){
+			if(!($newTaskID>0)){
                             $isSuccess = false;
                             array_push($feedbackArray,array('message' => 'Insert '.$TaskInfo['Title'].' failed', 'message_type' => 'error'));
                         }
@@ -154,23 +152,15 @@ class Refworks extends CI_Controller {
 				$MetaDataID = $MetaDataKey['MetaDataID'];
 				$XMLKey		= $MetaDataKey['XMLKey'];
 				
-				$result = element($XMLKey,$ref);
-				if(is_array($result)){
-					foreach ($result as $CurrentNode){
+				if (count($ref->$XMLKey)>0){
+					foreach ($ref->$XMLKey as $result){
 						$MetaDataInfo = array(
 							'TaskID' => $newTaskID,
 							'MetaDataID' => $MetaDataID,
-							'MetaDataValue' => $CurrentNode
+							'MetaDataValue' => (string)$result
 						);
 						array_push($MetaData,$MetaDataInfo);
 					}
-				}else{
-					$MetaDataInfo = array(
-						'TaskID' => $newTaskID,
-						'MetaDataID' => $MetaDataID,
-						'MetaDataValue' => $result
-					);
-					array_push($MetaData,$MetaDataInfo);
 				}
 			}
 			$status = $this-> Tasks_model-> insert_metadata_batch($MetaData);

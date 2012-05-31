@@ -89,7 +89,7 @@ class Tasks extends CI_Controller {
 			'KSUAuthors' => $this->input->post('KSUAuthors'),
 			'PubID' => $this->input->post('Publishers'),
 			'StatusID' => $this->input->post('Status'),
-			'UserID' => $this->input->post('User'),
+			'UserID' => $this->input->post('Users'),
 			'Notes' => $this->input->post('Notes'),
 			'FileNames' => $this->input->post('FileNames'),
                         'InsertedVia' => 'Form',
